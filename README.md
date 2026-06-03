@@ -1,38 +1,35 @@
-# ⚡ Crypto Pulse — Elfa AI Social Intelligence Dashboard
+# Crypto Pulse — Elfa AI Social Intelligence Dashboard
 
-Real-time crypto social intelligence dashboard powered by [Elfa AI](https://elfa.ai). Tracks trending tokens, narratives, trade signals, AI analysis, and more — all with live data.
+Real-time crypto social intelligence dashboard powered by Elfa AI. Tracks trending tokens, narratives, social mentions, event summaries, account intelligence, and market-related discussion data.
 
 ## Features
 
-- **🌍 Macro Overview** — AI-generated market briefing with key stats
-- **⚡ Trade Signals** — Clickable bullish/bearish tokens with on-demand AI trade setups (TP/SL/confidence)
-- **📈 Trending Tokens** — Ranked by social mention volume with change %
-- **📰 Events** — AI-summarized crypto events from Twitter/X
-- **💬 Narratives** — Trending narrative clusters
-- **🔥 Top Mentions** — Highest-engagement posts per token
-- **🔍 Search** — Real-time keyword mentions search
-- **🤖 Ask Elfa** — Interactive AI chat (macro, token analysis, account analysis)
-- **🧠 Smart Stats** — Twitter account intelligence
-- **📋 Contracts** — Trending contract addresses (Twitter + Telegram)
+- Macro overview with generated market briefings
+- Trending tokens ranked by social mention volume
+- Event summaries from crypto-related social data
+- Narrative clusters for tracking market themes
+- Top mentions by token
+- Keyword search across social mentions
+- Ask Elfa chat interface
+- Smart stats for Twitter/X account intelligence
+- Trending contract addresses from Twitter and Telegram
 
 ## Tech Stack
 
-- **Frontend:** React 18 + TypeScript + Vite 6
-- **Backend:** Express 5 + TypeScript (API proxy)
-- **Styling:** Zero external UI deps — pure CSS-in-JS
-- **Fonts:** JetBrains Mono + DM Sans
-- **Persistence:** localStorage (active tab, chat history)
+- Frontend: React 18 + TypeScript + Vite 6
+- Backend: Express 5 + TypeScript API proxy
+- Styling: CSS-in-JS with no external UI dependency
+- Persistence: localStorage for active tab and chat history
 
 ## Quick Start
 
 ### 1. Set up your API key
 
-Get a free API key at [go.elfa.ai/claude-skills](https://go.elfa.ai/claude-skills).
+Set `ELFA_API_KEY` in `server/.env`.
 
 ```bash
-# Copy the example env and add your key
 cp server/.env.example server/.env
-# Edit server/.env and set ELFA_API_KEY=your_key_here
+# edit server/.env and set ELFA_API_KEY=your_key_here
 ```
 
 ### 2. Install dependencies
@@ -49,8 +46,9 @@ npm run dev
 ```
 
 This starts both:
-- **Frontend** at http://localhost:3000 (Vite)
-- **Backend** at http://localhost:3001 (Express)
+
+- Frontend at http://localhost:3000
+- Backend at http://localhost:3001
 
 The Vite dev server proxies `/api/*` requests to the Express backend.
 
@@ -62,36 +60,36 @@ npm run build
 
 ## Architecture
 
-```
+```text
 crypto-pulse/
-├── src/                    # React frontend (TypeScript)
-│   ├── App.tsx             # Thin shell — header, nav, tab router, footer
+├── src/                    # React frontend
+│   ├── App.tsx             # Header, nav, tab router, footer
 │   ├── types/              # TypeScript interfaces
-│   ├── styles/             # CSS + inline styles
+│   ├── styles/             # Styles
 │   ├── utils/              # Formatting helpers
 │   ├── api/                # Typed API client
 │   ├── hooks/              # useApiData, useLocalStorage, useChat
 │   └── components/
-│       ├── layout/         # Header, Nav, Footer
-│       └── tabs/           # 10 tab components (one per feature)
-└── server/                 # Express backend (TypeScript)
+│       ├── layout/
+│       └── tabs/
+└── server/                 # Express backend
     └── src/
-        ├── routes/         # 9 API proxy routes
+        ├── routes/         # API proxy routes
         └── middleware/     # Error handler
 ```
 
-### API Key Security
+## API Key Security
 
-The Elfa API key is stored **only on the server** in `server/.env`. The frontend never sees the key — all API calls are proxied through the Express backend.
+The Elfa API key is stored only on the server in `server/.env`. The frontend never receives the key; browser requests go through the Express backend.
 
-### Live Data
+## Live Data
 
-Each tab fetches its own data on mount and auto-refreshes every 60 seconds. Only the active tab polls, staying within the 60 RPM rate limit.
+Each tab fetches its own data on mount and auto-refreshes every 60 seconds. Only the active tab polls, which helps stay within API rate limits.
 
-### Persistence
+## Persistence
 
-- **Active tab** — restored on page reload
-- **Chat history** — persisted across sessions via localStorage
+- Active tab is restored on page reload
+- Chat history is persisted locally via localStorage
 
 ## Elfa API Endpoints
 
@@ -109,4 +107,4 @@ Each tab fetches its own data on mount and auto-refreshes every 60 seconds. Only
 
 ## License
 
-MIT — built with data from [Elfa AI](https://elfa.ai).
+MIT — built with data from Elfa AI.
