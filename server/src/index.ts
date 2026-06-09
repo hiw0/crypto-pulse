@@ -7,12 +7,12 @@ import { apiRateLimiter } from './middleware/rateLimiter.js';
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: config.corsOrigin }));
 app.use(express.json());
 app.use('/api', apiRateLimiter);
 
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', hasApiKey: !!config.elfaApiKey });
+  res.json({ status: 'ok' });
 });
 
 mountRoutes(app);
